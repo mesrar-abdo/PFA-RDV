@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Account | SereneHealth{% endblock %}
+
+{% block body %}
+<div class="registration-wrapper" style="max-width: 700px; margin: 2rem auto; padding: 2rem; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid var(--accent-soft);">
+    
+    <h1 style="color: var(--primary-calm); font-family: 'Montserrat'; text-align: center; margin-bottom: 0.5rem;">Join SereneHealth</h1>
+    <p style="text-align: center; color: #666; margin-bottom: 2rem;">Start your journey to better wellness today.</p>
+
+    {{ form_start(registrationForm) }}
+        {# 1. Name Row #}
+        <div style="display: flex; gap: 20px; margin-bottom: 1.5rem;">
+            <div style="flex: 1;">
+                {{ form_label(registrationForm.firstName) }}
+                {{ form_widget(registrationForm.firstName, {'attr': {'style': 'width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--accent-soft);'}}) }}
+            </div>
+            <div style="flex: 1;">
+                {{ form_label(registrationForm.lastName) }}
+                {{ form_widget(registrationForm.lastName, {'attr': {'style': 'width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--accent-soft);'}}) }}
+            </div>
+        </div>
+
+        {# 2. Contact & Role Row #}
+        <div style="display: flex; gap: 20px; margin-bottom: 1.5rem;">
+            <div style="flex: 1;">
+                {{ form_label(registrationForm.phone) }}
+                {{ form_widget(registrationForm.phone, {'attr': {'style': 'width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--accent-soft);'}}) }}
+            </div>
+            <div style="flex: 1;">
+                {{ form_label(registrationForm.role) }}
+                {{ form_widget(registrationForm.role, {'attr': {'style': 'width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--accent-soft);'}}) }}
+            </div>
+        </div>
+
+        {# 3. Email (Full Width) #}
+        <div style="margin-bottom: 1.5rem;">
+            {{ form_label(registrationForm.email) }}
+            {{ form_widget(registrationForm.email, {'attr': {'style': 'width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--accent-soft);'}}) }}
+        </div>
+
+        {# 4. Password (Full Width) #}
+        <div style="margin-bottom: 1.5rem;">
+            {{ form_label(registrationForm.plainPassword, 'Security Password') }}
+            {{ form_widget(registrationForm.plainPassword, {'attr': {'style': 'width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--accent-soft);'}}) }}
+        </div>
+
+        {# 5. Terms #}
+        <div style="margin-bottom: 2rem; display: flex; align-items: center; gap: 10px;">
+            {{ form_widget(registrationForm.agreeTerms) }}
+            <span style="font-size: 0.9rem; color: #555;">I agree to the SereneHealth medical privacy terms.</span>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; padding: 15px; font-weight: 600; letter-spacing: 1px;">
+            CREATE ACCOUNT
+        </button>
+    {{ form_end(registrationForm) }}
+
+    <div style="text-align: center; margin-top: 1.5rem;">
+        <a href="{{ path('app_login') }}" style="color: var(--primary-calm); text-decoration: none; font-size: 0.9rem;">Already have an account? Log in</a>
+    </div>
+</div>
+{% endblock %}

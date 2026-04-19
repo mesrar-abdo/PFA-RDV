@@ -9,3 +9,12 @@
 
 controllers:
     resource: routing.controllers
+    type: attribute
+
+number:
+  path: /number
+  controller: App\Controller\Controller::number
+
+index:
+    path: /
+    controller: App\Controller\Controller::index
