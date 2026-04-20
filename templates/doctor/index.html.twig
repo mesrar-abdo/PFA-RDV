@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Doctor Profile | SereneHealth{% endblock %}
+
+{% block body %}
+{# Reduced overall container width and font-base to make it feel less "zoomed in" #}
+<div style="max-width: 1000px; margin: 1.5rem auto; font-family: 'Montserrat', sans-serif; color: #333; font-size: 0.95rem;">
+    
+    {# 1. Profile Header Section #}
+    <div style="display: flex; align-items: flex-start; gap: 25px; margin-bottom: 2rem; padding: 0 1rem;">
+        <div style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; background: #eee; border: 3px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.08); flex-shrink: 0;">
+            <img src="https://ui-avatars.com/api/?name=Dr+{{ app.user.lastName }}&background=E8F5E9&color=2E7D32&size=120" alt="Profile" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div style="padding-top: 10px;">
+            <h1 style="font-size: 1.8rem; margin: 0; color: #2d3748; font-weight: 700;">
+                Dr. {{ app.user.firstName }} {{ app.user.lastName }} 
+                <span style="color: #ffb400; font-size: 1.2rem; vertical-align: middle;">★</span>
+            </h1>
+            <p style="font-size: 1rem; color: #718096; margin-top: 4px;">{{ doctor.specialty|default('General Practitioner') }}</p>
+            
+            <div style="margin-top: 15px; display: flex; gap: 25px; border-bottom: 1px solid #e2e8f0; padding-bottom: 0;">
+                <span style="color: var(--primary-calm); font-weight: 600; border-bottom: 2px solid var(--primary-calm); padding-bottom: 8px; cursor: pointer;">Summary</span>
+                <span style="color: #a0aec0; cursor: pointer; padding-bottom: 8px;">Map</span>
+                <span style="color: #a0aec0; cursor: pointer; padding-bottom: 8px;">Presentation</span>
+            </div>
+        </div>
+    </div>
+
+    {# 2. Main Content Grid #}
+    <div style="display: grid; grid-template-columns: 1.6fr 1fr; gap: 25px; padding: 0 1rem;">
+        
+        {# Left Column #}
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+            
+            {# Specialties Card #}
+            <div style="background: #fff; padding: 1.25rem; border-radius: 10px; border: 1px solid #f0f0f0;">
+                <h4 style="margin: 0 0 12px 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; color: #718096; display: flex; align-items: center; gap: 8px;">
+                    <span style="color: #f59e0b;">💼</span> Specialties
+                </h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <span style="background: #f1f5f9; color: #475569; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">{{ doctor.specialty }}</span>
+                    <span style="background: #f1f5f9; color: #475569; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">Clinical Consultation</span>
+                </div>
+            </div>
+
+            {# NEW: Biography Section (Presentation) #}
+            <div style="background: #fff; padding: 1.5rem; border-radius: 10px; border: 1px solid #f0f0f0;">
+                <h4 style="margin: 0 0 12px 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; color: #718096; display: flex; align-items: center; gap: 8px;">
+                    <span style="color: #3b82f6;">📝</span> Presentation & Biography
+                </h4>
+                <div style="color: #4a5568; line-height: 1.6; font-size: 0.9rem;">
+                    {% if doctor.biography %}
+                        {{ doctor.biography|nl2br }}
+                    {% else %}
+                        <p style="font-style: italic; color: #a0aec0;">No biography provided yet. Update your profile to tell patients about your background.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            {# Map and access #}
+            <div style="background: #fff; padding: 1.25rem; border-radius: 10px; border: 1px solid #f0f0f0;">
+                <h4 style="margin: 0 0 12px 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; color: #718096; display: flex; align-items: center; gap: 8px;">
+                    <span style="color: #3182ce;">📍</span> Map and access information
+                </h4>
+                <p style="color: #2d3748; font-weight: 600; margin-bottom: 3px; font-size: 0.95rem;">Office Location</p>
+                <p style="color: #718096; margin: 0; font-size: 0.9rem;">{{ doctor.officeAddress|default('No address provided') }}</p>
+                
+                <div style="margin-top: 15px; height: 120px; background: #f8fafc; border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 1px dashed #cbd5e0;">
+                    <span style="color: #a0aec0; font-size: 0.8rem;">Interactive map will appear here</span>
+                </div>
+            </div>
+        </div>
+
+        {# Right Column: Booking Box #}
+        <div style="position: sticky; top: 20px;">
+            <div style="background: #00b18f; color: white; padding: 1.2rem; border-radius: 10px 10px 0 0;">
+                <h3 style="margin: 0; font-size: 1rem; line-height: 1.4;">Manage Appointment Settings</h3>
+            </div>
+            <div style="background: #fff; padding: 1.25rem; border-radius: 0 0 10px 10px; border: 1px solid #f0f0f0; border-top: none; box-shadow: 0 10px 20px rgba(0,0,0,0.04);">
+                <div style="margin-bottom: 15px;">
+                    <p style="font-size: 0.85rem; color: #718096; margin-bottom: 15px;">This box shows your availability to patients. You can modify your public profile below.</p>
+                    <a href="{{ path('app_doctor_edit') }}" class="btn-primary" style="display: block; text-align: center; text-decoration: none; padding: 10px; border-radius: 8px; font-weight: 600; font-size: 0.9rem;">
+                        EDIT PUBLIC INFO
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

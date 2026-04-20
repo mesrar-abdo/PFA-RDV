@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}SereneHealth | Appointments{% endblock %}</title>
+    <title>{% block title %}Sa7ti.com | Appointments{% endblock %}</title>
     
     {# Google Fonts: Inter for readability & Montserrat for a clean medical feel #}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -125,13 +125,23 @@
 </head>
 <body>
     <header>
-        <a href="/" class="logo">Serene<span>Health</span></a>
-        <nav>
-            <a href="#">Find a Doctor</a>
-            <a href="#">My Records</a>
-            <a href="#">Support</a>
-            <a href="#" class="btn-primary">Book Appointment</a>
-        </nav>
+       <a href="/" class="logo">sa7ti<span>.ma</span></a>
+<nav>
+    {# Show these only if NOT a doctor #}
+    {% if not is_granted('ROLE_DOCTOR') %}
+        <a href="#">Find a Doctor</a>
+        <a href="#">My Records</a>
+        <a href="#">Support</a>
+        <a href="#" class="btn-primary">Book Appointment</a>
+    {% endif %}
+
+    {# Logout button for any logged-in user #}
+    {% if app.user %}
+        <a href="{{ path('app_logout') }}" class="btn-primary">Logout</a>
+    {% endif %}
+</nav>
+      
+                
     </header>
 
     <main>
@@ -141,7 +151,7 @@
     </main>
 
     <footer>
-        &copy; {{ "now"|date("Y") }} SereneHealth Medical Group. All rights reserved.
+        &copy; {{ "now"|date("Y") }} Sa7ti Medical Group. All rights reserved.
     </footer>
 
     {% block javascripts %}{% endblock %}

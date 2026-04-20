@@ -1,12 +1,14 @@
 {% extends 'base.html.twig' %}
 
+
 {% block body %}
 <div style="text-align: center; padding: 4rem 2rem;">
     <h1 style="color: var(--primary-calm); font-size: 2.5rem; margin-bottom: 1rem;">
-        Welcome to SereneHealth
+        Welcome to Sa7ti.ma
     </h1>
     
     {% if app.user %}
+        
         <p style="font-size: 1.2rem; color: #555;">
             Hello, <strong>{{ app.user.firstName }}</strong>! 
             You are logged in as a <span style="text-transform: capitalize;">{{ app.user.role }}</span>.
@@ -14,7 +16,9 @@
         
         <div style="margin-top: 2rem;">
             {% if is_granted('ROLE_DOCTOR') %}
-                <a href="#" class="btn-primary">Manage My Schedule</a>
+                <a href="{{path('app_doctor_dashboard') }}" class="btn-primary">profile </a>
+                <a href="{{ path('app_doctor_edit') }}" class="btn-primary">edit</a>
+                <a href="#" class="btn-primary">new button</a>
             {% elseif is_granted('ROLE_ADMIN') %}
                 <a href="#" class="btn-primary">Admin Dashboard</a>
             {% else %}

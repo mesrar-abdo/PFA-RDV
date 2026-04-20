@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Professional Profile | SereneHealth{% endblock %}
+
+{% block body %}
+<div class="registration-wrapper" style="max-width: 800px; margin: 3rem auto; padding: 2.5rem; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(15px); border-radius: 24px; border: 1px solid var(--accent-soft); box-shadow: 0 8px 32px rgba(0,0,0,0.05);">
+    
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <h1 style="color: var(--primary-calm); font-family: 'Montserrat'; font-weight: 600;">Professional Profile</h1>
+        <p style="color: #718096;">Update your medical information for patients to see.</p>
+    </div>
+
+    {{ form_start(form) }}
+        <div style="margin-bottom: 1.5rem;">
+            {{ form_label(form.specialty, null, {'label_attr': {'style': 'display: block; margin-bottom: 8px; font-weight: 500; color: #4a5568;'}}) }}
+            {{ form_widget(form.specialty, {'attr': {'style': 'width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--accent-soft); outline: none;'}}) }}
+            {{ form_errors(form.specialty) }}
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+            {{ form_label(form.officeAddress, null, {'label_attr': {'style': 'display: block; margin-bottom: 8px; font-weight: 500; color: #4a5568;'}}) }}
+            {{ form_widget(form.officeAddress, {'attr': {'style': 'width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--accent-soft); outline: none;'}}) }}
+            {{ form_errors(form.officeAddress) }}
+        </div>
+
+        <div style="margin-bottom: 2rem;">
+            {{ form_label(form.biography, null, {'label_attr': {'style': 'display: block; margin-bottom: 8px; font-weight: 500; color: #4a5568;'}}) }}
+            {{ form_widget(form.biography, {'attr': {'style': 'width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--accent-soft); outline: none;', 'placeholder': 'Tell patients about your experience...'}}) }}
+            {{ form_errors(form.biography) }}
+        </div>
+
+        <div style="display: flex; gap: 15px;">
+            <button type="submit" class="btn-primary" style="flex: 2; padding: 14px; border-radius: 12px; font-weight: 600;">
+                SAVE CHANGES
+            </button>
+            <a href="{{ path('app_doctor_dashboard') }}" style="flex: 1; text-align: center; padding: 14px; border-radius: 12px; background: #edf2f7; color: #4a5568; text-decoration: none; font-weight: 500;">
+                CANCEL
+            </a>
+        </div>
+    {{ form_end(form) }}
+</div>
+{% endblock %}
